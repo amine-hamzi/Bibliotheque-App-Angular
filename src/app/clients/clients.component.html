@@ -1,0 +1,64 @@
+<h2 class=" offset-1 offset-sm-2 fw-lighter pt-5 text-white" >
+  Liste des clients
+</h2>
+<div class="card col-10 offset-1 col-sm-8 offset-sm-2 " style="border: 0;min-height: 700px">
+  <div class="card-header p-3 " style="background-color: rgba(213,241,244,100);">
+    <div class="row px-1" >
+        <form class="col col-sm-10 col-12 "  (ngSubmit)="onSearch(f1.value)" #f1="ngForm">
+          <div class="row">
+            <div class="p-0 m-0 col col-10 ">
+              <input  ngModel name="alias" type="text" class="form-control rounded-pill" >
+            </div>
+            <div style="text-align: right" class="col col-sm-1 col-2 p-0 m-0">
+              <button [disabled]="f1.invalid" type="submit" class="btn text-secondary "><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <div class="row ms-sm-1">
+            <div class="form-check col col-auto">
+              <input required [ngModel]="checked" value="email" class="form-check-input" type="radio" name="filtre" id="flexRadioDefault1" >
+              <label class="form-check-label" for="flexRadioDefault1">
+                Par email
+              </label>
+            </div>
+            <div class="form-check col col-auto ">
+              <input required [ngModel]="checked" value="nom"  class="form-check-input" type="radio" name="filtre" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Par nom
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <p *ngIf="nonTrouve" class="text-danger">Client non trouvé !</p>
+          </div>
+        </form>
+      <div  style="text-align: right" class="col col-sm-2 col-12 p-0 m-0">
+        <app-post-client></app-post-client>
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-0 ">
+    <div class="list-group list-group-flush border-bottom scrollarea">
+      <a *ngFor="let client of clients" class="list-group-item list-group-item-action  lh-tight" aria-current="true">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <h5 class="fw-normal">
+              {{ client.nom | uppercase}} {{client.prenom | titlecase }} {{client.travail | titlecase }}
+          </h5>
+          <small><button  (click)="onDelete(client)" class="btn text-secondary "><i class="fas fa-trash-alt"></i></button>
+          <app-put-client [self]="client._links.self.href"
+                                 [adresse]="client.adresse" [email]="client.email" [nom]="client.nom"
+                                 [prenom]="client.prenom" [travail]="client.travail" [dateCreation]="client.dateCreation" ></app-put-client></small>
+        </div>
+        <div class="col-10 mb-1 small text-secondary" >
+          <p class="fw-lighter">{{ client.adresse | titlecase }}<br>{{ client.dateCreation | date: 'd/MM/yyyy' }}
+            <br><app-send-mail [email]="client.email"></app-send-mail></p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

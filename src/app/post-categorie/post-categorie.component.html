@@ -1,0 +1,30 @@
+<p-dialog [dismissableMask]="true" [modal]="true" position="top" [(visible)]="display" styleClass="light-dialog" [style]="{width: '450px',minWidth:'250px',position: 'sticky', top:'0px'}" [contentStyle]="{padding:'0px'}" position="top" >
+  <ng-template pTemplate="header">
+    <h4 class="m-0 p-0 fw-light">Création</h4>
+  </ng-template>
+
+  <div class="row py-1 m-0" >
+    <div class="col col-sm-12 text-start">
+      <form  (ngSubmit)="onCreate(f.value)" #f="ngForm">
+        <div class="my-2">
+          <label for="code" class="form-label p-0 m-0 ms-2">Code</label>
+          <input  ngModel required name="code" type="text" class="form-control rounded-pill" id="code" >
+        </div>
+
+        <div class="my-2">
+          <label for="label" class="form-label p-0 m-0 ms-2">Label</label>
+          <input ngModel  required name="label" type="text" class="form-control rounded-pill" id="label" >
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button class="btn rounded-pill " (click)="close()">Annuler</button>
+    <button style="background-color: #d5f1f4" type="submit" class="btn rounded-pill"  [disabled]="f.invalid"  (click)="close();onCreate(f.value)" >Sauvegarder</button>
+  </ng-template>
+</p-dialog>
+
+<button class="btn text-secondary" type="button" (click)="showDialog()"  label="Show"><i class="fas fa-plus"></i></button>
+
+

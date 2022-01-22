@@ -1,0 +1,8 @@
+*{
+  margin: 0;
+  border : 0;
+}
+:host ::ng-deep .p-dialog-header  {
+  background-color: rgba(213,241,244,100);
+
+}

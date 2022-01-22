@@ -1,0 +1,52 @@
+
+<p-dialog [dismissableMask]="true" [modal]="true" position="top" [(visible)]="display" styleClass="light-dialog" [style]="{width: '450px',minWidth:'250px',position: 'sticky', top:'0px'}" [contentStyle]="{padding:'0px'}" position="top" >
+  <ng-template pTemplate="header">
+    <h4 class="m-0 p-0 fw-light">Modification</h4>
+  </ng-template>
+
+  <div class="row py-1 m-0" >
+    <div class="col col-sm-12">
+      <form (ngSubmit)="onUpdate(f.value)" #f="ngForm">
+        <div class="my-3">
+          <label for="isbn" class="form-label p-0 m-0 ms-2">Isbn</label>
+          <input  [ngModel]="isbn"  name="isbn" type="text" class="form-control rounded-pill" id="isbn" >
+        </div>
+
+        <div class="my-3">
+          <label for="title" class="form-label p-0 m-0 ms-2">Titre</label>
+          <input [ngModel]="title"  name="title" type="text" class="form-control rounded-pill" id="title" >
+        </div>
+
+        <div class="row my-3">
+          <div class="my-0 col col-sm-6 ">
+            <label for="nbreExemplaires" class="form-label p-0 m-0 ms-2">Nombre d'exemplaires</label>
+            <input [ngModel]="nbreExemplaires"  name="nbreExemplaires" type="text" class="form-control rounded-pill" id="nbreExemplaires" >
+          </div>
+          <div class="my-0 col-sm-6">
+            <label for="dateCreation" class="form-label p-0 m-0 ms-2">Date de création</label>
+            <input [ngModel]="dateCreation | date : 'yyyy-MM-dd'" required name="dateCreation" type="date" class="form-control rounded-pill" id="dateCreation" >
+          </div>
+        </div>
+
+
+        <div class="my-3">
+          <label for="auteur" class="form-label p-0 m-0 ms-2">Auteur</label>
+          <input [ngModel]="auteur"  name="auteur" type="text" class="form-control rounded-pill" id="auteur" >
+        </div>
+
+        <div class="my-3">
+          <label for="categorie" class="form-label p-0 m-0 ms-2">Catégorie</label>
+          <select name="categorie" [ngModel]="categorie?._links.self.href"   id="categorie" class="form-select rounded-pill" aria-label="Default select example">
+            <option  *ngFor="let categori of categories" [value]="categori?._links.self.href">{{categori.label}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+      <button class="btn rounded-pill " (click)="close()">Annuler</button>
+      <button style="background-color: #d5f1f4" type="submit" class="btn rounded-pill"  [disabled]="f.invalid"  (click)="close();onUpdate(f.value)" >Sauvegarder</button>
+  </ng-template>
+</p-dialog>
+
+<button class="btn text-secondary" type="button" (click)="showDialog()"  label="Show"><i class="fas fa-pen"></i></button>

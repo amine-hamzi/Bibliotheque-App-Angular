@@ -1,0 +1,74 @@
+
+
+
+<div style="background-image: url('./assets/img5.jpg');background-size: cover;filter: brightness(100%);background-repeat: no-repeat;
+  background-attachment: fixed;min-height: 100vh" class="m-0 p-0 bg-image container-fluid justify-content-center" >
+  <nav  class=" navbar navbar-expand-lg navbar-light bg-light p-0 m-0 shadow-lg" >
+    <div class="container-fluid p-0 m-0">
+      <a class="navbar-brand px-2  py-1" routerLink="home">
+        <img width="70" height="25" src="../assets/logo3.png">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse py-1" id="navbarTogglerDemo01">
+        <ul   class=" navbar-nav me-auto  mb-lg-0  ">
+          <li [ngStyle]="{'background-color' :acceuil.isActive ? 'rgba(213,241,244,100)' : ''}"  #acceuil="routerLinkActive" routerLinkActive="active" class="nav-item px-2 py-0 rounded-pill">
+            <a  routerLink="home" class="nav-link text-secondary " aria-current="page" >Acceuil</a>
+          </li>
+          <li [ngStyle]="{'background-color' :categories.isActive ? 'rgba(213,241,244,100)' : ''}"  #categories="routerLinkActive" routerLinkActive="active" class="nav-item px-2 py-0 rounded-pill">
+            <a  routerLink="categories" class="nav-link text-secondary" >Categories</a>
+          </li>
+          <li [ngStyle]="{'background-color' :livres.isActive ? 'rgba(213,241,244,100)' : ''}" #livres="routerLinkActive" routerLinkActive="active" class="nav-item px-2 py-0  rounded-pill">
+            <a  routerLink="livres" class="nav-link text-secondary" >Livres</a>
+          </li>
+          <li [ngStyle]="{'background-color' :clients.isActive ? 'rgba(213,241,244,100)' : ''}" #clients="routerLinkActive" routerLinkActive="active"    class="nav-item px-2 py-0 rounded-pill">
+            <a  routerLink="clients" class="nav-link text-secondary" aria-current="page" >Clients</a>
+          </li>
+          <li [ngStyle]="{'background-color' :prets.isActive ? 'rgba(213,241,244,100)' : ''}" #prets="routerLinkActive" routerLinkActive="active" class="nav-item px-2 py-0 rounded-pill">
+            <a routerLink="prets" class="nav-link text-secondary" >Prêts</a>
+          </li>
+          <li [ngStyle]="{'background-color' :reservations.isActive ? 'rgba(213,241,244,100)' : ''}" #reservations="routerLinkActive" routerLinkActive="active" class="nav-item px-2 py-0 rounded-pill">
+            <a routerLink="reservations" class="nav-link text-secondary" >Réservations</a>
+          </li>
+        </ul >
+        <div class="d-flex">
+          <ul  class="navbar-nav pe-auto mb-2 mb-lg-0">
+            <li [ngStyle]="{'background-color' :login.isActive ? 'rgba(213,241,244,100)' : ''}" #login="routerLinkActive" routerLinkActive="active" class="nav-item px-2 py-0 rounded-pill">
+              <a *ngIf="!isAuthenticated()" routerLink="login" class="nav-link text-secondary">Connexion</a>
+            </li>
+            <li  routerLinkActive="active" class="nav-item px-2">
+              <a  *ngIf="isAuthenticated()" routerLink="login" (click)="logout()"  class="nav-link text-secondary">Déconnexion</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+  <footer [ngClass]="{'fixed-bottom':!categories.isActive && !clients.isActive && !livres.isActive && !prets.isActive}" style="position: marker;bottom: 0;background-color: white"   class="d-flex flex-wrap justify-content-between align-items-center mt-5 shadow-lg">
+    <div class="col-md-4 d-flex align-items-center">
+      <a routerLink="home" class=" ms-2  me-2 mb-md-0 text-white text-decoration-none lh-1 py-2">
+        <img width="70" height="25" src="../assets/logo3.png">
+      </a>
+      <span  class=" fw-normal text-secondary">© 2021 </span>
+    </div>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-secondary" href="#"><i class="bi bi-twitter"></i></a></li>
+      <li class="ms-3"><a class="text-secondary" href="#"><i class="bi bi-instagram"></i></a></li>
+      <li class="ms-3 me-3"><a class="text-secondary" href="#"><i   class="bi bi-facebook"></i></a></li>
+    </ul>
+  </footer>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+

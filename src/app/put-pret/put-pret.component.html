@@ -1,0 +1,42 @@
+<p-dialog [dismissableMask]="true" [modal]="true" position="top" [(visible)]="display" styleClass="light-dialog" [style]="{width: '450px',minWidth:'250px',position: 'sticky', top:'0px'}" [contentStyle]="{padding:'0px'}" position="top" >
+  <ng-template pTemplate="header">
+    <h4 class="m-0 p-0 fw-light">Modification</h4>
+  </ng-template>
+
+  <div class="row py-1 m-0" >
+    <div class="col col-sm-12">
+      <form  #f="ngForm">
+        <div class="my-3">
+          <label for="dateDebut" class="form-label p-0 m-0 ms-2">Date de début</label>
+          <input [ngModel]="dateDebut | date: 'yyyy-MM-dd'"  name="dateDebut" type="date" class="form-control rounded-pill" id="dateDebut" >
+        </div>
+
+        <div class="my-3">
+          <label for="dateFin" class="form-label p-0 m-0 ms-2">Date de fin</label>
+          <input [ngModel]="dateFin | date: 'yyyy-MM-dd'"   name="dateFin" type="date" class="form-control rounded-pill" id="dateFin" >
+        </div>
+
+        <div class="my-3">
+          <label for="livre" class="form-label p-0 m-0 ms-2">Livre</label>
+          <select [ngModel]="livre?._links.self.href" name="livre" id="livre" class="form-select rounded-pill" aria-label="Default select example">
+            <option *ngFor="let livre of livres" [value]="livre?._links.self.href">{{livre?.title}}</option>
+          </select>
+        </div>
+
+        <div class="my-3">
+          <label for="client" class="form-label p-0 m-0 ms-2">Client</label>
+          <select [ngModel]="client?._links.self.href" name="client" id="client" class="form-select rounded-pill" aria-label="Default select example">
+            <option *ngFor="let client of clients" [value]="client?._links.self.href">{{client?.nom}} {{client?.prenom}}</option>
+          </select>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button class="btn rounded-pill " (click)="close()">Annuler</button>
+    <button style="background-color: #d5f1f4" type="submit" class="btn rounded-pill"  [disabled]="f.invalid"  (click)="close();onUpdate(f.value)" >Sauvegarder</button>
+  </ng-template>
+</p-dialog>
+
+<button class="btn text-secondary" type="button" (click)="showDialog()"  label="Show"><i class="fas fa-pen"></i></button>

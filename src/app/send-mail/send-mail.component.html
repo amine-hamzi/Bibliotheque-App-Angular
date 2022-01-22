@@ -1,0 +1,30 @@
+<p-dialog [dismissableMask]="true" id="dialog" [modal]="true" position="top" [(visible)]="display"  [style]="{width: '450px',minWidth:'270px',position: 'sticky', top:'0px'}" [contentStyle]="{padding:'0px'}" >
+  <ng-template pTemplate="header">
+    <h4 class="m-0 p-0 fw-light">Envoie d'un mail</h4>
+  </ng-template>
+
+  <div class="row py-1 m-0" >
+    <div class="col col-sm-12">
+      <form  #f="ngForm">
+
+        <div class="my-3">
+          <label for="subject" class="form-label p-0 m-0 ms-2">Objet</label>
+          <input type="text"  ngModel name="subject" class="form-control rounded-pill" id="subject" >
+        </div>
+
+        <div class="my-3">
+          <label for="body" class="form-label p-0 m-0 ms-2">Message</label>
+          <textarea style="height: 150px" ngModel name="body" class="form-control rounded" id="body" ></textarea>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button class="btn rounded-pill " (click)="close()">Annuler</button>
+    <button style="background-color: #d5f1f4" type="submit" class="btn rounded-pill "  [disabled]="f.invalid"  (click)="close();onSend(f.value)" >Envoyer</button>
+  </ng-template>
+</p-dialog>
+
+<a class="btn-link btn  p-0 m-0 fw-lighter text-decoration-none" (click)="showDialog()">{{ email }}</a>

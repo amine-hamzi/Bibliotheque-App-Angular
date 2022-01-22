@@ -1,0 +1,27 @@
+<div class="text-center mt-5 ">
+<main class="form-signin">
+  <form (ngSubmit)="onLogin(f.value)" #f="ngForm">
+    <h1 style="color: rgba(213,241,244,100);" class="mb-3 fw-lighter">Connexion</h1>
+    <div class="form-floating mb-2">
+      <input ngModel name="username" type="email" class="form-control rounded" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mt-3">
+      <input ngModel name="password" type="password" class="form-control rounded" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input ngModel="rememberMe" name="rememberMe" type="checkbox" > <span class="text-white fw-light">Se souvenir de moi</span>
+      </label>
+    </div>
+    <div *ngIf="!nonAffiche" class=" mb-3">
+      <p class="text-white ">
+        email ou mot de passe incorrecte
+      </p>
+    </div>
+    <button [disabled]="f.invalid" class="w-100 btn rounded-pill " style="background-color: rgba(213,241,244,100);" type="submit">Se connecter</button>
+  </form>
+</main>
+</div>

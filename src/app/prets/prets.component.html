@@ -1,0 +1,68 @@
+<h2 class=" offset-1 offset-sm-2 fw-lighter pt-5 text-white">
+  Liste des prêts
+</h2>
+<div  class="card col-10 offset-1 col-sm-8 offset-sm-2 " style="border: 0;min-height: 700px">
+  <div class="card-header p-3" style="background-color: rgba(213,241,244,100);">
+    <div class=" px-1 row ">
+        <form class="col col-sm-10 col-12"  (ngSubmit)="onSearch(f1.value)" #f1="ngForm">
+          <div class="row">
+            <div class="p-0 m-0 col col-10 ">
+              <input *ngIf="f1.value.filtre === 'date'"  ngModel name="alias"  type="date" class="form-control rounded-pill" >
+              <input *ngIf="f1.value.filtre != 'date'" ngModel name="alias"  type="email" class="form-control rounded-pill">
+            </div>
+            <div style="text-align: right" class="col col-2 col-sm-1 p-0 m-0">
+              <button [disabled]="f1.invalid" type="submit" class="btn text-secondary "><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <div class="row ms-sm-1">
+            <div class="form-check col col-auto">
+              <input [ngModel]="checked" required ngModel value="email" class="form-check-input" type="radio" name="filtre" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Par email
+              </label>
+            </div>
+            <div class="form-check col col-auto ">
+              <input [ngModel]="checked" required ngModel value="date"  class="form-check-input" type="radio" name="filtre" id="flexRadioDefault2" >
+              <label class="form-check-label" for="flexRadioDefault2">
+                Par date
+              </label>
+            </div>
+          </div>
+          <div class="row ">
+            <p *ngIf="nonTrouve" class="text-danger p-0 m-0">Prêt non trouvé !</p>
+          </div>
+        </form>
+      <div style="text-align: right" class="col col-sm-2 col-12 p-0 m-0">
+        <app-post-pret></app-post-pret>
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="list-group list-group-flush border-bottom scrollarea">
+      <a *ngFor="let pret of prets" class="list-group-item list-group-item-action lh-tight" aria-current="true">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+
+          <h5 class="fw-normal">
+            {{pret.client?.nom | uppercase}} {{ pret.client?.prenom | titlecase}}
+          </h5>
+          <small>
+            <button (click)="onDelete(pret)" class="btn text-secondary "><i class="fas fa-trash-alt"></i></button>
+            <app-put-pret [self]="pret._links?.self.href" [client]="pret.client" [dateDebut]="pret.dateDebut"
+            [dateFin]="pret.dateFin" [livre]="pret.livre"></app-put-pret>
+          </small>
+        </div>
+        <div class="col-10  small text-secondary">
+          <p class="fw-lighter"><strong>Livre : </strong>{{ pret.livre?.title | titlecase}}<br><Strong>Date de début : </Strong>{{ pret.dateDebut | date: 'dd/MM/yy' }}<br>
+            <Strong>Date de fin : </Strong> {{ pret.dateFin | date: 'dd/MM/yy' }}
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

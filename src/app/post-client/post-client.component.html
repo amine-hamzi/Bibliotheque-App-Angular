@@ -1,0 +1,51 @@
+<p-dialog [dismissableMask]="true" [modal]="true" position="top" [(visible)]="display" styleClass="light-dialog" [style]="{width: '450px',minWidth:'250px',position: 'sticky', top:'0px'}" [contentStyle]="{padding:'0px'}" position="top" >
+  <ng-template pTemplate="header">
+    <h4 class="m-0 p-0 fw-light">Création</h4>
+  </ng-template>
+
+  <div class="row py-1 m-0" >
+    <div class="col col-sm-12 text-start">
+      <form  (ngSubmit)="onCreate(f.value)" #f="ngForm">
+        <div class="row">
+          <div class="my-2 col col-6">
+            <label for="nom" class="form-label p-0 m-0 ms-2">Nom</label>
+            <input  ngModel required name="nom" type="text" class="form-control rounded-pill" id="nom" >
+          </div>
+
+          <div class="my-2 col col-6">
+            <label for="title" class="form-label p-0 m-0 ms-2">Prenom</label>
+            <input ngModel  required name="prenom" type="text" class="form-control rounded-pill" id="title" >
+          </div>
+        </div>
+
+
+        <div class="my-2">
+          <label for="nbreExemplaires" class="form-label p-0 m-0 ms-2">Travail</label>
+          <input ngModel required name="travail" type="text" class="form-control rounded-pill" id="nbreExemplaires" >
+        </div>
+
+        <div class="my-2">
+          <label for="dateCreation" class="form-label p-0 m-0 ms-2">Date de création</label>
+          <input ngModel required name="dateCreation" type="date" class="form-control rounded-pill" id="dateCreation" >
+        </div>
+
+        <div class="my-2">
+          <label for="adresse" class="form-label p-0 m-0 ms-2">Adresse</label>
+          <input ngModel  required name="adresse" type="text" class="form-control rounded-pill" id="adresse" >
+        </div>
+
+        <div class="my-2">
+          <label for="email" class="form-label p-0 my-0 ms-3 ">Email</label>
+          <input ngModel="" required name="email" typ p-0 m-0e="email" class="form-control rounded-pill" id="email" >
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button class="btn rounded-pill " (click)="close()">Annuler</button>
+    <button style="background-color: #d5f1f4" type="submit" class="btn rounded-pill"  [disabled]="f.invalid"  (click)="close();onCreate(f.value)" >Sauvegarder</button>
+  </ng-template>
+</p-dialog>
+
+<button class="btn text-secondary" type="button" (click)="showDialog()"  label="Show"><i class="fas fa-plus"></i></button>
+
